@@ -15,18 +15,20 @@ str(round(env.observation_space.low[2],2)), str(round(env.observation_space.high
 time.sleep(2)
 # print(env.observation_space.low)
 # print(env.observation_space.high)
-
+cumreward = 0
 for _ in range(1000):
     env.render()
     action = env.action_space.sample()
     step = env.step(action) # take a random action
     observations, reward, done, info = step
     yposition, angle, angvel = round(observations[0],3), round(observations[1],3), round(observations[2],3)
-    
+    cumreward += reward
+
     reward = round(reward,3)
     action = round(action[0],3)
-    print ("action  y-position  anlge     angVel  reward    done    info\n {0}{1}{2}{3}{4}{5}".format(str(action).ljust(10), 
-    str(yposition).ljust(10), str(angle).ljust(10), str(angvel).ljust(8), str(reward).ljust(10), str(done).ljust(10), info))
+    cumreward = round(cumreward,3)
+    print ("action  y-position  anlge     angVel  reward   cumreward    done    info\n {0}{1}{2}{3}{4}{5}".format(str(action).ljust(10), 
+    str(yposition).ljust(10), str(angle).ljust(10), str(angvel).ljust(8), str(reward).ljust(10), str(cumreward).ljust(10), str(done).ljust(10), info))
 
     time.sleep(0.2)
 
