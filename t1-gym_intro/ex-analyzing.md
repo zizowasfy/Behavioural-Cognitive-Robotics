@@ -11,7 +11,6 @@ The car in this environment is trying to climb up the hill to reach the flag. Th
 - observation: Car position in the y-axis ; Car velocity in the y-axis
 - reward: if the car reaches more than half the distance (0.5), it will give a reward of 0 ; -1 otherwise.
 - done: check whether the environment reaches any of the termination conditions, reachTimeLimit ; exceed a certain position ; ...   
-
 - info: provide some logging information
 In this demo, no training was done, instead, uniform random ranged actions were given to the car. So at every env.reset() command, a new episode begins with different new initial random actions.
 
@@ -29,3 +28,8 @@ In this environment, both the action and the reward are continous not discrete a
 <p align="center" >
 <img src="https://user-images.githubusercontent.com/70958856/140207215-da896bab-1e99-4ef3-b901-54c44b829c7c.png" width="500" height="80">
 </p>
+
+## References
+1- https://gym.openai.com/envs/#classic_control
+
+2- https://github.com/openai/gym/blob/master/gym/envs/classic_control/continuous_mountain_car.py
