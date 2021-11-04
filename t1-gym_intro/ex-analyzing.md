@@ -11,8 +11,9 @@ The car in this environment is trying to climb up the hill to reach the flag. Th
 - observation: Car position in the y-axis ; Car velocity in the y-axis
 - reward: if the car reaches more than half the distance (0.5), it will give a reward of 0 ; -1 otherwise.
 - done: check whether the environment reaches any of the termination conditions, reachTimeLimit ; exceed a certain position ; ...   
-- info: provide some logging information
-In this demo, no training was done, instead, uniform random ranged actions were given to the car. So at every env.reset() command, a new episode begins with different new initial random actions.
+- info: provide some logging information.
+
+In this demo, no training was done; instead, uniform random ranged actions are given to the car. However, at every env.reset() command, a new episode begins with random initial actions, thus the initial position of the car changes from one episode to another.
 
 <p align="center" >
 <img src="https://user-images.githubusercontent.com/70958856/140199026-59ecfb46-7ffd-4ec3-a83c-50074dd3b2a2.png" width="500" height="80">
