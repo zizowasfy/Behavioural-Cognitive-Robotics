@@ -13,8 +13,7 @@ str(round(env.observation_space.low[1],2)), str(round(env.observation_space.high
 str(round(env.observation_space.low[2],2)), str(round(env.observation_space.high[2],2))    ))
 
 time.sleep(2)
-# print(env.observation_space.low)
-# print(env.observation_space.high)
+
 cumreward = 0
 for _ in range(1000):
     env.render()
