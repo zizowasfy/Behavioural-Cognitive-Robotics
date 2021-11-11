@@ -17,8 +17,10 @@ class Network:
         self.nmotorn = noutputs
         
         self.neuralNet()
-    
-    def neuralNet(self, params=0):    #ToDo give the number of network layers as a input parameter to neuralNet() *update not necessary; the architecture should be added manually 
+
+    #ToDo give the number of network layers as a input parameter to neuralNet() *update not necessary; the architecture should be added manually 
+    def neuralNet(self, params=0):         # This funciton creates the architecture of the Neural Network 
+
         pvariance = 0.1     # variance of initial parameters
         ppvariance = 0.02   # variance of perturbations
         nhiddens = 5        # number of internal neurons
@@ -46,7 +48,8 @@ class Network:
             
         return params
 
-    def update(self, observation):
+    def update(self, observation):      # Apply the feed-forward to output the trained action of the environment
+
         # convert the observation array into a matrix with 1 column and ninputs rows
         observation.resize(self.nsensoryn,1)
         # compute the netinput of the first layer of neurons
@@ -66,7 +69,7 @@ class Network:
 
         return action
     
-    def evaluate(self, nepisodes):
+    def evaluate(self, nepisodes):      # Evaluate each genotype (individual) through nepisodes and calculate the cumulative reward
         cumreward = 0
         for e in range(nepisodes):
             observation = env.reset()
@@ -93,8 +96,8 @@ avgthreshold = 20   #20
 maxthreshold = 200  #200
 env = gym.make("CartPole-v0")
 
-print(env.observation_space.shape)  # (4,)
-print(env.action_space.n)   # 2 = nmotorn
+# print(env.observation_space.shape)  # (4,)
+# print(env.action_space.n)   # 2 = nmotorn
 
 
 network = Network(env, 5)
@@ -105,21 +108,18 @@ rank = []
 popparams = np.zeros((popsize, nparameters))
 
 g, avgpopfitness, maxpopfitness = 0, 0, 0
-# for g in range(ngenerations):
 try:    
-    while maxpopfitness < maxthreshold :
-
-        # popfitness  = 0
-        for i in range(popsize):
+    # for g in range(ngenerations):
+    while maxpopfitness < maxthreshold:         # Loop until the fitness of generation reaches a pre-defined threshold
+        for i in range(popsize):                # Evalualte each genotype of every population and calculate its fitness
             params = network.neuralNet(popparams[i][:])
             fit = network.evaluate(nepisodes)
             rank.append((fit,i))
             popparams[i][:] = params
             # popfitness += fit
-        rank.sort(key=lambda x: x[0])
+        rank.sort(key=lambda x: x[0])           # Rank the genotypes of the current population according to their fitness
         
-        for j in range(int(popsize/2)):
-            # population[3] = population[7] + random vector with range mutrange
+        for j in range(int(popsize/2)):         # Replace the first half (low fitness) of the population with the other half (high fitness)  
             ind_sorted = rank[j][1] # index of the first 5 individuals from the rank sorted list
             popparams[ind_sorted][:] = popparams[j+int(popsize/2)][:] + np.random.randn(1,nparameters)*mutrange
 
