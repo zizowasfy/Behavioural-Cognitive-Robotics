@@ -1,0 +1,1 @@
+## In this task, an agent is trained to acheieve a certain goal. The training is carried out using stable-baseline3 library; which is a Reinforcement Learning implementation supporting many policy algorithms (e.g: PPO, HER, A2C, ...) 
